@@ -18,11 +18,14 @@ class FileConfig
     protected $name_singular_lowercase;
     protected $stub_variable;
     protected $namespace;
-    protected $is_make;
+    protected $make_controller;
+    protected $make_model;
     protected $table;
 
-    protected function __construct()
+    protected function setData($table,  $namespace)
     {
+        $this->namespace = $namespace;
+        $this->table = $table;
         $this->name_plural_lowercase = Str::plural(strtolower($this->table));
         $this->name_singular_lowercase = Str::singular(strtolower($this->table));
         $this->stub_path = config('crd.stub_path', resource_path('stubs'));
@@ -33,7 +36,6 @@ class FileConfig
         $this->name_title = Str::title($this->name_singular_lowercase);
         $this->name_ucfirst = Str::ucfirst($this->name_singular_lowercase);
 
-        $this->namespace = config('crd.namespace.controller', 'App\\Http\\Controllers');
 
         $this->stub_variable = [
             '{{namespace}}' => $this->namespace,
@@ -47,6 +49,7 @@ class FileConfig
             '{{name_singular_lowercase}}' => $this->name_singular_lowercase,
         ];
 
-        $this->is_make = config('crd.file_create.controller', true);
+        $this->make_controller = config('crd.file_create.controller', true);
+        $this->make_model = config('crd.file_create.model', true);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Class\FileCommand;
 use App\Class\MakeController;
+use App\Class\MakeModel;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -18,6 +19,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/product', [ProductController::class, 'index']);
 
 Route::get('/test', function () {
+    $table = 'user_details';
 
-    return MakeController::create();
+    new MakeController($table);
+    new MakeModel($table);
 });

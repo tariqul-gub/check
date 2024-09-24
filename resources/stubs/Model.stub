@@ -1,0 +1,13 @@
+<?php
+
+namespace {{namespace}};
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{name_pascel}} extends Model
+{
+    protected $fillable = [
+        //
+    ];
+}
+
