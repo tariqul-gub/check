@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,19 +15,40 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/product', [ProductController::class, 'index']);
 
 Route::get('/test', function () {
-    // Define the directory and file path
-    $directory = 'custom';
-    $fileName = 'custom.php';
-    $filePath = $directory . '/' . $fileName;
+    // Step 1: Define the stub file path
+    $stubFilePath = resource_path('stubs/Controller.stub');
 
-    // Define the content you want to write into the file
-    $content = "<?php\n\n// Custom PHP content\n\n echo 'Hello from custom.php!';";
-
-    // Step 1: Check if directory exists, if not create it
-    if (!Storage::exists($directory)) {
-        Storage::makeDirectory($directory); // Creates the /custom directory
+    // Step 2: Check if the stub file exists
+    if (!File::exists($stubFilePath)) {
+        return 'Stub file does not exist!';
     }
 
-    // Step 2: Create the custom.php file with the content
-    Storage::put($filePath, $content);
+    // Step 3: Get the content of the stub file
+    $stubContent = File::get($stubFilePath);
+
+    // Step 4: Replace the placeholders in the stub content
+    // Assume the stub has placeholders like {{controllerName}} or {{namespace}}
+    $controllerName = 'CustomController';
+    $namespace = 'App\\Http\\Controllers';
+
+    // Replace the placeholders with actual values
+    $modifiedContent = str_replace(
+        ['{{controllerName}}', '{{namespace}}'],  // Placeholders in stub
+        [$controllerName, $namespace],            // Values to replace with
+        $stubContent
+    );
+
+    // Step 5: Define the directory and file path for custom.php in the base path
+    $directory = base_path('custom');
+    $filePath = $directory . '/custom.php';
+
+    // Step 6: Check if the directory exists, if not create it
+    if (!File::exists($directory)) {
+        File::makeDirectory($directory, 0755, true); // Create /custom directory
+    }
+
+    // Step 7: Create and write the modified content to custom.php
+    File::put($filePath, $modifiedContent);
+
+    return 'custom.php created successfully with stub content!';
 });
