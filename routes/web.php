@@ -3,6 +3,7 @@
 use App\Class\FileCommand;
 use App\Class\MakeController;
 use App\Class\MakeModel;
+use App\Http\Controllers\CrudController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -14,6 +15,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('crud/get-table', [CrudController::class, 'getTable']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/product', [ProductController::class, 'index']);
