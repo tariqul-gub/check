@@ -86,7 +86,7 @@
                 </table>
                 Fillable
                 <pre>
-                   protected $fillable = [{{ collect($fillable)->join(', ') }}];
+                   protected $fillable = [{{ collect($fillable)->map(function ($item) {return "'$item'";})->join(', ') }}];
                 </pre>
 
                 Validation Rules
