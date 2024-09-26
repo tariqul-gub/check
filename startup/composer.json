@@ -1,22 +1,19 @@
 {
-    "name": "babylon/startup",
+    "name": "brl/startup",
+    "description": "A sample Laravel package",
+    "type": "library",
     "autoload": {
         "psr-4": {
-            "Brl\\Startup\\": "startup/src/"
+            "Brl\\Startup\\": "src/",
+            "Brl\\Startup\\App\\": "startup/src/app/"
         }
     },
-    "authors": [
-        {
-            "name": "tariqul-babylon",
-            "email": "tariqul@newgen-bd.com"
-        }
-    ],
-    "require": {},
     "extra": {
         "laravel": {
             "providers": [
                 "Brl\\Startup\\StartupServiceProvider"
             ]
         }
-    }
+    },
+    "require": {}
 }

@@ -1,7 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use  Brl\Startup\Controllers\A;
 
-Route::get('/aa', function () {
-    return 'ss';
+use Illuminate\Support\Facades\Route;
+use Brl\Startup\app\Controllers\CrudController;
+
+Route::group(['prefix' => 'brl-startup'], function () {
+
+    Route::get('/get-table', [CrudController::class, 'getTable']);
 });

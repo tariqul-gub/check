@@ -18,7 +18,7 @@ class StartupServiceProvider extends ServiceProvider
     }
     public function boot()
     {
-
+        $this->loadViewsFrom(__DIR__ . '/views', 'startup');
         $this->publishes([
             __DIR__ . '/config/startup.php' => config_path('startup.php'),
         ], 'config');
