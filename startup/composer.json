@@ -1,0 +1,22 @@
+{
+    "name": "babylon/startup",
+    "autoload": {
+        "psr-4": {
+            "Brl\\Startup\\": "startup/src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tariqul-babylon",
+            "email": "tariqul@newgen-bd.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Brl\\Startup\\StartupServiceProvider"
+            ]
+        }
+    }
+}
